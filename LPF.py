@@ -34,7 +34,6 @@ class LPF :
             self.r.append(self.sum) 
             self.t=self.t+self.sampling_time    ## increment sampling time
     def startLPF (self):
-        self.signalSettings()
         self.noiseConstruct()
         self.x=[self.r[0]]                      ## values read by ADC for example >> fill first location by first reading
         self.y=[self.r[0]]                      ## real output values >> first output value is first read value
