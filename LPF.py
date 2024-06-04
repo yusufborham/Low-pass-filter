@@ -1,4 +1,4 @@
-import math
+ import math
 import matplotlib as plt 
 import matplotlib.pyplot as plt
 
@@ -33,7 +33,8 @@ class LPF :
                                                 ## adding main signal
             self.r.append(self.sum) 
             self.t=self.t+self.sampling_time    ## increment sampling time
-    def startLPF (self):
+    def startLPF (self,title='hello'):
+        self.title=title
         self.noiseConstruct()
         self.x=[self.r[0]]                      ## values read by ADC for example >> fill first location by first reading
         self.y=[self.r[0]]                      ## real output values >> first output value is first read value
@@ -47,11 +48,21 @@ class LPF :
             self.y.append(self.a*self.x[self.z]+(1-self.a)*self.y[self.z-1])   ## Yi=aXi=(1-a)*Yi-1 ## calculating the output
             self.t=self.t+self.sampling_time                         ## sampling time
             self.z=self.z+1                                                    ## increment counter
+        self.title=self.calIntegral()
+        plt.title(self.title)
         plt.plot(self.time, self.r)
         plt.plot(self.time, self.y , color='r')
         plt.show()
-        
-
+        return self.y
+    def calIntegral (self):               # calculates the integral
+        data=self.y
+        yh=[data[0],data[1]]
+        sum=0
+        for i in data :
+            yh[1]=i
+            sum=sum+(self.sampling_time/2)*(yh[1]+yh[0])
+            yh[0]=yh[1]
+        return sum
  
  
 
