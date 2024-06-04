@@ -52,14 +52,7 @@ class LPF :
         plt.plot(self.time, self.y , color='r')
         plt.show()
         
-## example         
 
-d={2000:0.1,1400:0.2,1000:0.05}   ## set noises (frequency:amplitude)
-l1=LPF()                          
-l1.setNoise(d)
-l1.setCutfrequency(100)
-l1.setInputSignal(2.5,50,2.5)
-l1.startLPF()
  
  
 
